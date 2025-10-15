@@ -50,11 +50,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _goToHome() {
-    Navigator.pushReplacementNamed(context, '/home');
+    Navigator.pushNamed(context, '/home');
   }
 
   void _goToLogin() {
-    Navigator.pushReplacementNamed(context, '/login');
+    Navigator.pushNamed(context, '/login');
   }
 
   @override
@@ -64,10 +64,10 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.flutter_dash, size: 80, color: Colors.blue),
+            Icon(Icons.business_outlined, size: 80, color: Colors.blue),
             SizedBox(height: 20),
             Text(
-              "My App",
+              "Shurjomukhi Test",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),

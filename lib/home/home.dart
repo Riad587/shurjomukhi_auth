@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await _auth.signOut();
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('biometric_enabled', false);
-    Navigator.pushReplacementNamed(context, '/loginPage');
+    Navigator.pushNamed(context, '/login');
   }
 
   @override
@@ -99,10 +99,17 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.blue[200],
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: const Text("Home"),
+        leading: Icon(Icons.menu),
         actions: [
-          IconButton(onPressed: _logout, icon: const Icon(Icons.logout)),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: _logout,
+            tooltip: 'Logout',
+          ),
         ],
       ),
       body: Padding(
@@ -110,6 +117,18 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Enable Fingerprint Login",
+                    style: TextStyle(fontSize: 16)),
+                Switch(
+                  value: _biometricEnabled,
+                  onChanged: _toggleBiometric,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
             Card(
               elevation: 3,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -135,17 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Enable Fingerprint Login",
-                    style: TextStyle(fontSize: 16)),
-                Switch(
-                  value: _biometricEnabled,
-                  onChanged: _toggleBiometric,
-                ),
-              ],
-            ),
           ],
         ),
       ),
@@ -153,31 +161,3 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-
-
-// import 'package:firebase_auth_demo/fingerprint_auth.dart';
-// import 'package:flutter/material.dart';
-
-// class HomeScreen extends StatefulWidget {
-//   const HomeScreen({super.key});
-
-//   @override
-//   State<HomeScreen> createState() => _HomeScreenState();
-// }
-
-// class _HomeScreenState extends State<HomeScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: ElevatedButton(
-//         onPressed: ()async {
-//           bool check = await FingerprintAuth().fingerAuthenticate();
-//           if(check){
-//             Navigator.pushNamed(context, '/loginPage');
-//           }
-//         },
-//         child: const Text('Please authenticate to login'),
-//       ),
-//     );
-//   }
-// }
