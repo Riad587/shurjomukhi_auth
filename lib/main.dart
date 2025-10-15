@@ -1,8 +1,8 @@
 
-import 'package:firebase_auth_demo/home.dart';
-import 'package:firebase_auth_demo/login.dart';
-import 'package:firebase_auth_demo/sign_up.dart';
-import 'package:firebase_auth_demo/splash_screen.dart';
+import 'package:firebase_auth_demo/home/home.dart';
+import 'package:firebase_auth_demo/auth/login.dart';
+import 'package:firebase_auth_demo/auth/sign_up.dart';
+import 'package:firebase_auth_demo/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
