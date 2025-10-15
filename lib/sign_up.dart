@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth_demo/style/textfield_style.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -61,20 +62,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Register")),
+      backgroundColor: Colors.blue[200],
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TextField(controller: _fullNameController, decoration: const InputDecoration(labelText: "Full Name")),
+              const SizedBox(height: 80),
+              const Icon(Icons.business_outlined, size: 80, color: Colors.blue),
+              const SizedBox(height: 20),
+              const Text("Sign Up", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 30),
+              TextField(controller: _fullNameController, decoration: textFieldDecoration("Fullname"),),
               const SizedBox(height: 10),
-              TextField(controller: _phoneController, decoration: const InputDecoration(labelText: "Phone Number")),
+              TextField(controller: _emailController, decoration: textFieldDecoration("Email"),),
               const SizedBox(height: 10),
-              TextField(controller: _emailController, decoration: const InputDecoration(labelText: "Email")),
+              TextField(controller: _phoneController, decoration: textFieldDecoration("Phone Number"),),
               const SizedBox(height: 10),
-              TextField(controller: _passwordController, obscureText: true, decoration: const InputDecoration(labelText: "Password")),
-              const SizedBox(height: 35),
+              TextField(controller: _passwordController, obscureText: true, decoration: textFieldDecoration("Password"),),
+              const SizedBox(height: 10),
             DropdownButtonFormField<String>(
               value: _selectedRole,
               items: _roles.map((role) {
@@ -88,18 +94,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   _selectedRole = value;
                 });
               },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Select your role',
-              ),
+              decoration: textFieldDecoration("Select Role"),
             ),
             const SizedBox(height: 24),
               _loading
                   ? const CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: _register,
-                      child: const Text("Register"),
-                    ),
+                  : SizedBox(
+                    width: double.infinity,
+                    height: 45,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                        onPressed: _register,
+                        child: const Text("Sign Up",style: TextStyle(color: Colors.black),),
+                      ),
+                  ),
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
